@@ -1,0 +1,8 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+kakao:
+  api:
+    key: 8637f135593c71343ec84139e3dcac88
