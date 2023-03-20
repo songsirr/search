@@ -1,7 +1,11 @@
-package com.mj.search.external.kakao;
+package com.mj.search.external.naver;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.mj.search.common.error.KakaoErrorCode;
+import com.mj.search.common.error.NaverErrorCode;
 import com.mj.search.common.exception.ServiceException;
 import com.mj.search.external.IHttpManager;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -20,7 +24,7 @@ import org.apache.hc.core5.util.Timeout;
 import java.io.IOException;
 import java.net.URI;
 
-public class KakaoHttpManager implements IHttpManager {
+public class NaverHttpManager implements IHttpManager {
 
     private final CloseableHttpClient httpClient;
 
@@ -30,7 +34,7 @@ public class KakaoHttpManager implements IHttpManager {
 
     private final Integer connectTimeout;
 
-    public KakaoHttpManager(Builder builder){
+    public NaverHttpManager(Builder builder){
         this.proxy = builder.proxy;
         this.connectionRequestTimeout = builder.connectionRequestTimeout;
         this.connectTimeout = builder.connectTimeout;
@@ -84,9 +88,9 @@ public class KakaoHttpManager implements IHttpManager {
                 if (jsonElement.isJsonObject()) {
                     final JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
 
-                    if (jsonObject.has("errorType")) {
-                        if (jsonObject.has("message")) {
-                            errorMessage = jsonObject.get("message").getAsString();
+                    if (jsonObject.has("errorCode")) {
+                        if (jsonObject.has("errorMessage")) {
+                            errorMessage = jsonObject.get("errorMessage").getAsString();
                         }
                     }
                 }
@@ -97,19 +101,17 @@ public class KakaoHttpManager implements IHttpManager {
 
         switch (httpResponse.getCode()) {
             case HttpStatus.SC_BAD_REQUEST:
-                throw new ServiceException(KakaoErrorCode.KAKAO_BAD_REQUEST, errorMessage);
+                throw new ServiceException(NaverErrorCode.NAVER_BAD_REQUEST, errorMessage);
             case HttpStatus.SC_UNAUTHORIZED:
-                throw new ServiceException(KakaoErrorCode.KAKAO_UNAUTHORIZED, errorMessage);
+                throw new ServiceException(NaverErrorCode.NAVER_UNAUTHORIZED, errorMessage);
             case HttpStatus.SC_FORBIDDEN:
-                throw new ServiceException(KakaoErrorCode.KAKAO_FORBIDDEN, errorMessage);
+                throw new ServiceException(NaverErrorCode.NAVER_FORBIDDEN, errorMessage);
+            case HttpStatus.SC_NOT_FOUND:
+                throw new ServiceException(NaverErrorCode.NAVER_NOT_FOUND, errorMessage);
             case HttpStatus.SC_TOO_MANY_REQUESTS:
-                throw new ServiceException(KakaoErrorCode.KAKAO_TOO_MANY_REQUEST, errorMessage);
+                throw new ServiceException(NaverErrorCode.NAVER_TOO_MANY_REQUEST, errorMessage);
             case HttpStatus.SC_INTERNAL_SERVER_ERROR:
-                throw new ServiceException(KakaoErrorCode.KAKAO_INTERNAL_SERVER_ERROR, errorMessage);
-            case HttpStatus.SC_BAD_GATEWAY:
-                throw new ServiceException(KakaoErrorCode.KAKAO_BAD_GATEWAY, errorMessage);
-            case HttpStatus.SC_SERVICE_UNAVAILABLE:
-                throw new ServiceException(KakaoErrorCode.KAKAO_SERVICE_UNAVAILABLE, errorMessage);
+                throw new ServiceException(NaverErrorCode.NAVER_INTERNAL_SERVER_ERROR, errorMessage);
             default:
                 return responseBody;
         }
@@ -137,8 +139,8 @@ public class KakaoHttpManager implements IHttpManager {
             return this;
         }
 
-        public KakaoHttpManager build(){
-            return new KakaoHttpManager(this);
+        public NaverHttpManager build(){
+            return new NaverHttpManager(this);
         }
     }
 }

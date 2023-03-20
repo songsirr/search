@@ -2,13 +2,13 @@ package com.mj.search.external.kakao.model;
 
 import com.google.gson.JsonObject;
 
-public class BlogSearchResult extends AbstractKakaoModel {
+public class KakaoBlogSearchResult extends AbstractKakaoModel {
 
     private final BlogResult[] blogs;
 
     private final SearchMeta searchMeta;
 
-    private BlogSearchResult(final Builder builder) {
+    private KakaoBlogSearchResult(final Builder builder) {
         super(builder);
         this.blogs = builder.blogs;
         this.searchMeta = builder.searchMeta;
@@ -25,7 +25,7 @@ public class BlogSearchResult extends AbstractKakaoModel {
 
     @Override
     public String toString() {
-        return "BlogSearchResult{" +
+        return "KakaoBlogSearchResult{" +
                 "blogs=" + blogs +
                 "meta=" + searchMeta +
                 '}';
@@ -47,18 +47,18 @@ public class BlogSearchResult extends AbstractKakaoModel {
         }
 
         @Override
-        public BlogSearchResult build() {
-            return new BlogSearchResult(this);
+        public KakaoBlogSearchResult build() {
+            return new KakaoBlogSearchResult(this);
         }
     }
 
-    public static final class JsonUtil extends AbstractKakaoModel.JsonUtil<BlogSearchResult> {
-        public BlogSearchResult createModelObject(JsonObject jsonObject) {
+    public static final class JsonUtil extends AbstractKakaoModel.JsonUtil<KakaoBlogSearchResult> {
+        public KakaoBlogSearchResult createModelObject(JsonObject jsonObject) {
             if (jsonObject == null || jsonObject.isJsonNull()) {
                 return null;
             }
 
-            return new BlogSearchResult.Builder()
+            return new KakaoBlogSearchResult.Builder()
                     .setBlogs(
                         hasAndNotNull(jsonObject, "documents")
                             ? new BlogResult.JsonUtil().createModelObjectArray(

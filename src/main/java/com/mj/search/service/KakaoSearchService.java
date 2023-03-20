@@ -1,8 +1,8 @@
 package com.mj.search.service;
 
-import com.mj.search.external.kakao.model.BlogSearchResult;
+import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 
 public interface KakaoSearchService {
 
-    BlogSearchResult search(String query) throws Exception;
+    KakaoBlogSearchResult search(String query) throws Exception;
 }

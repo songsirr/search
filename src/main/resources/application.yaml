@@ -2,7 +2,27 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
 
 kakao:
   api:
     key: 8637f135593c71343ec84139e3dcac88
+
+naver:
+  client:
+    id: ZvpDU3Q6qGPZjyDCt8L_
+    secret: nPgkYkRW6B

@@ -86,8 +86,8 @@ public class SearchMeta extends AbstractKakaoModel {
                                     ? jsonObject.get("pageable_count").getAsInt()
                                     : 0)
                     .setEnd(
-                            hasAndNotNull(jsonObject, "isEnd")
-                                    ? jsonObject.get("isEnd").getAsBoolean()
+                            hasAndNotNull(jsonObject, "is_end")
+                                    ? jsonObject.get("is_end").getAsBoolean()
                                     : true)
                     .build();
         }

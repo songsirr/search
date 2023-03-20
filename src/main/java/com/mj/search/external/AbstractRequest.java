@@ -33,7 +33,8 @@ public abstract class AbstractRequest<T> implements IRequest<T>{
         uriBuilder
                 .setScheme(builder.scheme)
                 .setHost(builder.host)
-                .setPort(builder.port);
+                .setPort(builder.port)
+                .setPath(builder.path);
         if (builder.queryParameters.size() > 0) {
             uriBuilder
                     .setParameters(builder.queryParameters);

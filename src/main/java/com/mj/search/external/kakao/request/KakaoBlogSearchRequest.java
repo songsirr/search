@@ -1,25 +1,25 @@
 package com.mj.search.external.kakao.request;
 
 import com.mj.search.common.exception.ServiceException;
-import com.mj.search.external.kakao.model.BlogSearchResult;
+import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
 
-public class KakaoBlogSearchRequest extends AbstractKaKaoRequest<BlogSearchResult> {
+public class KakaoBlogSearchRequest extends AbstractKaKaoRequest<KakaoBlogSearchResult> {
 
     private KakaoBlogSearchRequest(final Builder builder) {
         super(builder);
     }
 
-    public BlogSearchResult execute() throws
+    public KakaoBlogSearchResult execute() throws
             IOException,
             ParseException,
             ServiceException {
-        return new BlogSearchResult.JsonUtil().createModelObject(getJson());
+        return new KakaoBlogSearchResult.JsonUtil().createModelObject(getJson());
     }
 
-    public static final class Builder extends AbstractKaKaoRequest.Builder<BlogSearchResult, Builder> {
+    public static final class Builder extends AbstractKaKaoRequest.Builder<KakaoBlogSearchResult, Builder> {
         public Builder(final String apiToken) {
             super(apiToken);
         }
@@ -48,6 +48,7 @@ public class KakaoBlogSearchRequest extends AbstractKaKaoRequest<BlogSearchResul
             return setQueryParameter("sort", sort);
         }
 
+        @Override
         public KakaoBlogSearchRequest build() {
             setPath("/v2/search/blog");
             return new KakaoBlogSearchRequest(this);
