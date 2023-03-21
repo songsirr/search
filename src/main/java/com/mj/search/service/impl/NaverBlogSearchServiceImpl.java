@@ -1,11 +1,17 @@
 package com.mj.search.service.impl;
 
+import com.mj.search.common.enums.NaverSearchOption;
+import com.mj.search.common.exception.NaverServiceException;
+import com.mj.search.dto.SearchRequestDto;
 import com.mj.search.external.naver.NaverApi;
 import com.mj.search.external.naver.model.NaverBlogSearchResult;
 import com.mj.search.external.naver.request.NaverBlogSearchRequest;
 import com.mj.search.service.NaverSearchService;
+import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class NaverBlogSearchServiceImpl implements NaverSearchService {
@@ -26,9 +32,15 @@ public class NaverBlogSearchServiceImpl implements NaverSearchService {
 
 
     @Override
-    public NaverBlogSearchResult search(String query) throws Exception {
-        NaverBlogSearchRequest request = naverApi.blogSearch(query).build();
-        NaverBlogSearchResult result = request.execute();
-        return result;
+    public NaverBlogSearchResult search(SearchRequestDto dto)
+            throws NaverServiceException, IOException, ParseException {
+        NaverBlogSearchRequest naverBlogSearchRequest = naverApi.blogSearch(dto.getQuery())
+                    .display(dto.getSize())
+                    .start(dto.getPage())
+                    .sort(NaverSearchOption.findByCommonCode(dto.getSort()).getNaverCode())
+                    .build();
+
+        NaverBlogSearchResult n = naverBlogSearchRequest.execute();
+        return n;
     }
 }

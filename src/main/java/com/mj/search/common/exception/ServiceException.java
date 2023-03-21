@@ -1,7 +1,6 @@
 package com.mj.search.common.exception;
 
-import com.mj.search.common.error.IErrorCodeEnum;
-import com.mj.search.common.error.KakaoErrorCode;
+import com.mj.search.external.error.IErrorCodeEnum;
 
 public class ServiceException extends RuntimeException{
 

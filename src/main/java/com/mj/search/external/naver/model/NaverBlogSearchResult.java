@@ -14,7 +14,7 @@ public class NaverBlogSearchResult extends AbstractNaverModel {
 
     private final Integer display;
 
-    private BlogResult[] items;
+    private final BlogResult[] items;
 
     private NaverBlogSearchResult(final Builder builder) {
         super(builder);
@@ -40,6 +40,10 @@ public class NaverBlogSearchResult extends AbstractNaverModel {
 
     public Integer getDisplay() {
         return display;
+    }
+
+    public BlogResult[] getItems() {
+        return items;
     }
 
     @Override

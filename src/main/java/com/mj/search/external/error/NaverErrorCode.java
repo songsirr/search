@@ -1,4 +1,4 @@
-package com.mj.search.common.error;
+package com.mj.search.external.error;
 
 public enum NaverErrorCode implements IErrorCodeEnum {
 

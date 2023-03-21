@@ -2,18 +2,16 @@ package com.mj.search.common.error;
 
 import com.mj.search.external.error.IErrorCodeEnum;
 
-public enum OrmError implements IErrorCodeEnum {
+public enum CommonError implements IErrorCodeEnum {
 
-    DATA_ACCESS_EXCEPTION(530, "Q100", "DATA_ACCESS_EXCEPTION"),
-    DATA_INTEGRITY_VIOLATION_EXCEPTION(530, "Q100", "DATA_INTEGRITY_VIOLATION_EXCEPTION"),
-    DUPLICATE_KEY_EXCEPTION(540, "Q300", "DUPLICATE_KEY_EXCEPTION"),
-    SQL_BAD_GRAMMAR_EXCEPTION(550, "Q900", "SQL_BAD_GRAMMAR_EXCEPTION");
+    COMMON_INTERNAL_SERVER_ERROR(500, "500", "Internal Server Error"),
+    COMMON_NOT_FOUND_ERROR(404, "404", "NOT FOUND");
 
     private final String code;
     private final String message;
     private int status;
 
-    OrmError(final int status, final String code, final String message) {
+    CommonError(final int status, final String code, final String message) {
         this.status = status;
         this.message = message;
         this.code = code;
@@ -33,4 +31,5 @@ public enum OrmError implements IErrorCodeEnum {
     public String getMessage() {
         return this.message;
     }
+
 }

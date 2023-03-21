@@ -1,7 +1,8 @@
 package com.mj.search.external.kakao;
 
 import com.google.gson.*;
-import com.mj.search.common.error.KakaoErrorCode;
+import com.mj.search.common.exception.KakaoServiceException;
+import com.mj.search.external.error.KakaoErrorCode;
 import com.mj.search.common.exception.ServiceException;
 import com.mj.search.external.IHttpManager;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -97,19 +98,19 @@ public class KakaoHttpManager implements IHttpManager {
 
         switch (httpResponse.getCode()) {
             case HttpStatus.SC_BAD_REQUEST:
-                throw new ServiceException(KakaoErrorCode.KAKAO_BAD_REQUEST, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_BAD_REQUEST, errorMessage);
             case HttpStatus.SC_UNAUTHORIZED:
-                throw new ServiceException(KakaoErrorCode.KAKAO_UNAUTHORIZED, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_UNAUTHORIZED, errorMessage);
             case HttpStatus.SC_FORBIDDEN:
-                throw new ServiceException(KakaoErrorCode.KAKAO_FORBIDDEN, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_FORBIDDEN, errorMessage);
             case HttpStatus.SC_TOO_MANY_REQUESTS:
-                throw new ServiceException(KakaoErrorCode.KAKAO_TOO_MANY_REQUEST, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_TOO_MANY_REQUEST, errorMessage);
             case HttpStatus.SC_INTERNAL_SERVER_ERROR:
-                throw new ServiceException(KakaoErrorCode.KAKAO_INTERNAL_SERVER_ERROR, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_INTERNAL_SERVER_ERROR, errorMessage);
             case HttpStatus.SC_BAD_GATEWAY:
-                throw new ServiceException(KakaoErrorCode.KAKAO_BAD_GATEWAY, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_BAD_GATEWAY, errorMessage);
             case HttpStatus.SC_SERVICE_UNAVAILABLE:
-                throw new ServiceException(KakaoErrorCode.KAKAO_SERVICE_UNAVAILABLE, errorMessage);
+                throw new KakaoServiceException(KakaoErrorCode.KAKAO_SERVICE_UNAVAILABLE, errorMessage);
             default:
                 return responseBody;
         }

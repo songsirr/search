@@ -1,6 +1,8 @@
 package com.mj.search.domain;
 
+import com.mj.search.dto.HotKeywordDto;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,7 @@ import java.util.Date;
 @Slf4j
 @DynamicInsert
 @DynamicUpdate
+@Builder
 public class SearchHistory implements Serializable {
 
     @Id
@@ -26,6 +29,18 @@ public class SearchHistory implements Serializable {
 
     private String keyword;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    private Integer hit;
+
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    public void updateHit(){this.hit = this.hit++;}
+
+    public HotKeywordDto toDto(){
+
+        return HotKeywordDto.builder()
+                .keyword(this.keyword)
+                .count(this.hit)
+                .build();
+    }
 }

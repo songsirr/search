@@ -3,15 +3,14 @@ package com.mj.search.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 public class CommonSearchResultDto {
 
-    private String title;
+    ArrayList<CommonSearchItemDto> list;
 
-    private String contents;
-
-    private String link;
-
-    private String time;
+    Pagination pagination;
 }

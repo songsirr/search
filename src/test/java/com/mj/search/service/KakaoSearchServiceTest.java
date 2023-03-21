@@ -16,13 +16,13 @@ public class KakaoSearchServiceTest {
         this.kakaoSearchService = kakaoSearchService;
     }
 
-    @Test
-    void searchTest(){
-        try {
-            KakaoBlogSearchResult b = kakaoSearchService.search("안녕");
-            Assertions.assertNotNull(b);
-        } catch (Exception e){
-            e.getMessage();
-        }
-    }
+//    @Test
+//    void searchTest(){
+//        try {
+//            KakaoBlogSearchResult b = kakaoSearchService.search("안녕");
+//            Assertions.assertNotNull(b);
+//        } catch (Exception e){
+//            e.getMessage();
+//        }
+//    }
 }

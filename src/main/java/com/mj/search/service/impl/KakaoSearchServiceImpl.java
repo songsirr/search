@@ -1,11 +1,16 @@
 package com.mj.search.service.impl;
 
+import com.mj.search.common.exception.KakaoServiceException;
+import com.mj.search.dto.SearchRequestDto;
 import com.mj.search.external.kakao.KakaoApi;
 import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 import com.mj.search.external.kakao.request.KakaoBlogSearchRequest;
 import com.mj.search.service.KakaoSearchService;
+import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class KakaoSearchServiceImpl implements KakaoSearchService {
@@ -20,12 +25,17 @@ public class KakaoSearchServiceImpl implements KakaoSearchService {
     }
 
     @Override
-    public KakaoBlogSearchResult search(String query) throws Exception {
+    public KakaoBlogSearchResult search(SearchRequestDto dto)
+            throws KakaoServiceException, IOException, ParseException {
 
-        KakaoBlogSearchRequest request = kakaoApi.blogSearch(query).build();
+        KakaoBlogSearchRequest kakaoBlogSearchRequest = kakaoApi.blogSearch(dto.getQuery())
+                .size(dto.getSize())
+                .page(dto.getPage())
+                .sort(dto.getSort())
+                .build();
 
-        final KakaoBlogSearchResult result = request.execute();
+        final KakaoBlogSearchResult k = kakaoBlogSearchRequest.execute();
 
-        return result;
+        return k;
     }
 }

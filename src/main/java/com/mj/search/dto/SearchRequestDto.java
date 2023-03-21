@@ -1,15 +1,21 @@
 package com.mj.search.dto;
 
+import com.mj.search.common.constant.CommonConstant;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class SearchRequestDto {
 
     private String query;
 
-    private Integer page;
+    @Builder.Default
+    private Integer page = CommonConstant.DEFAULT_SEARCH_PAGE;
 
-    private Integer size;
+    @Builder.Default
+    private Integer size = CommonConstant.DEFAULT_SEARCH_SIZE;
 
-    private String sort;
+    @Builder.Default
+    private String sort = CommonConstant.SEARCH_SORT_ACCURACY;
 }

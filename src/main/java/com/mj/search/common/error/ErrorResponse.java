@@ -1,5 +1,6 @@
 package com.mj.search.common.error;
 
+import com.mj.search.external.error.IErrorCodeEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,6 @@
 package com.mj.search.dto;
 
+import com.mj.search.common.constant.CommonConstant;
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,9 +8,18 @@ import lombok.Data;
 @Builder
 public class Pagination {
 
-    int page;
+    @Builder.Default
+    private int page = CommonConstant.DEFAULT_SEARCH_PAGE;
 
-    int size;
+    @Builder.Default
+    private int size = CommonConstant.DEFAULT_SEARCH_SIZE;
 
-    boolean finish;
+    @Builder.Default
+    private String sort = CommonConstant.SEARCH_SORT_ACCURACY;
+
+    @Builder.Default
+    private int totalPage = 0;
+
+    @Builder.Default
+    boolean next = false;
 }

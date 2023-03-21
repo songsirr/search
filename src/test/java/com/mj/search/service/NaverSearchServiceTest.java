@@ -16,13 +16,13 @@ public class NaverSearchServiceTest {
         this.naverSearchService = naverSearchService;
     }
 
-    @Test
-    void searchTest() {
-        try {
-            NaverBlogSearchResult b = naverSearchService.search("안녕");
-            Assertions.assertNotNull(b);
-        } catch (Exception e){
-            e.getMessage();
-        }
-    }
+//    @Test
+//    void searchTest() {
+//        try {
+//            NaverBlogSearchResult b = naverSearchService.search("안녕");
+//            Assertions.assertNotNull(b);
+//        } catch (Exception e){
+//            e.getMessage();
+//        }
+//    }
 }

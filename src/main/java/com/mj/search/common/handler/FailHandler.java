@@ -37,7 +37,7 @@ public class FailHandler {
      * @param e
      * @return
      */
-    @org.springframework.web.bind.annotation.ExceptionHandler(DataAccessException.class)
+    @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<ResponseWrapperDto> handleException(DataAccessException e) {
 
         OrmError errorCode = OrmError.DATA_ACCESS_EXCEPTION;
