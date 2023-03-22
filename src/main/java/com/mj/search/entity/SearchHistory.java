@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,22 +33,15 @@ public class SearchHistory implements Serializable {
 
     private Integer hit;
 
-    @CreatedDate
-    @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
-    private Date updatedAt;
-
     public void updateHit(){
         this.hit++;
     }
 
     @Builder
-    public SearchHistory(Long id, String keyword, Integer hit, Date updatedAt) {
+    public SearchHistory(Long id, String keyword, Integer hit) {
         this.id = id;
         this.keyword = keyword;
         this.hit = hit;
-        this.updatedAt = updatedAt;
     }
 
     public HotKeywordDto toDto(){
