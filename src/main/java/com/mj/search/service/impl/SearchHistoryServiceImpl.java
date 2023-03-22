@@ -1,6 +1,6 @@
 package com.mj.search.service.impl;
 
-import com.mj.search.domain.SearchHistory;
+import com.mj.search.entity.SearchHistory;
 import com.mj.search.dto.HotKeywordDto;
 import com.mj.search.repository.SearchHistoryRepository;
 import com.mj.search.service.SearchHistoryService;

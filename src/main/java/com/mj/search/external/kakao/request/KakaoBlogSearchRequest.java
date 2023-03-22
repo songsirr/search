@@ -1,6 +1,7 @@
 package com.mj.search.external.kakao.request;
 
 import com.mj.search.external.exception.ExternalSearchServiceException;
+import com.mj.search.external.kakao.constant.KakaoConstant;
 import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 import org.apache.hc.core5.http.ParseException;
 
@@ -25,27 +26,19 @@ public class KakaoBlogSearchRequest extends AbstractKaKaoRequest<KakaoBlogSearch
         }
 
         public Builder query(final String query) {
-            assert (query != null);
-            assert (!query.equals(""));
-            return setQueryParameter("query", query);
+            return setQueryParameter("query", query == null ? KakaoConstant.KAKAO_DEFAULT_SEARCH_KEYWORD : query);
         }
 
         public Builder page(final Integer page) {
-            assert (page != null);
-            assert (1 <= page && page <= 50);
-            return setQueryParameter("page", page);
+            return setQueryParameter("page", page == null ? KakaoConstant.KAKAO_DEFAULT_PAGE : page);
         }
 
         public Builder size(final Integer size) {
-            assert (size != null);
-            assert (1 <= size && size <= 50);
-            return setQueryParameter("size", size);
+            return setQueryParameter("size", size == null ? KakaoConstant.KAKAO_DEFAULT_SIZE : size);
         }
 
         public Builder sort(final String sort) {
-            assert (sort != null);
-            assert (sort.equals("accuracy") || sort.equals("recency"));
-            return setQueryParameter("sort", sort);
+            return setQueryParameter("sort", sort == null ? KakaoConstant.KAKAO_DEFAULT_SORT : sort);
         }
 
         @Override

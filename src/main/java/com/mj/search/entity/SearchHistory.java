@@ -1,4 +1,4 @@
-package com.mj.search.domain;
+package com.mj.search.entity;
 
 import com.mj.search.dto.HotKeywordDto;
 import lombok.AccessLevel;
@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,11 +32,14 @@ public class SearchHistory implements Serializable {
 
     private Integer hit;
 
+    @CreatedDate
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at")
     private Date updatedAt;
 
     public void updateHit(){
-        this.hit = this.hit + 1;
+        this.hit++;
     }
 
     @Builder

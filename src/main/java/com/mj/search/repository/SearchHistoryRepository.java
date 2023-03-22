@@ -1,6 +1,6 @@
 package com.mj.search.repository;
 
-import com.mj.search.domain.SearchHistory;
+import com.mj.search.entity.SearchHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

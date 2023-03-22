@@ -1,6 +1,7 @@
 package com.mj.search.external.naver.request;
 
 import com.mj.search.external.exception.ExternalSearchServiceException;
+import com.mj.search.external.naver.constant.NaverConstant;
 import com.mj.search.external.naver.model.NaverBlogSearchResult;
 import org.apache.hc.core5.http.ParseException;
 
@@ -25,27 +26,19 @@ public class NaverBlogSearchRequest extends AbstractNaverRequest<NaverBlogSearch
         }
 
         public Builder query(final String query) {
-            assert (query != null);
-            assert (!query.equals(""));
-            return setQueryParameter("query", query);
+            return setQueryParameter("query", query == null ? NaverConstant.NAVER_DEFAULT_SEARCH_KEYWORD : query);
         }
 
         public Builder display(final Integer display) {
-            assert (display != null);
-            assert (10 <= display && display <= 100);
-            return setQueryParameter("display", display);
+            return setQueryParameter("display", display == null ? NaverConstant.NAVER_DEFAULT_DISPLAY : display);
         }
 
         public Builder start(final Integer start) {
-            assert (start != null);
-            assert (1 <= start && start <= 1000);
-            return setQueryParameter("start", start);
+            return setQueryParameter("start", start == null ? NaverConstant.NAVER_DEFAULT_START : start);
         }
 
         public Builder sort(final String sort) {
-            assert (sort != null);
-            assert (sort.equals("sim") || sort.equals("date"));
-            return setQueryParameter("sort", sort);
+            return setQueryParameter("sort", sort == null ? NaverConstant.NAVER_DEFAULT_SORT : sort);
         }
 
         @Override
