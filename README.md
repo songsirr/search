@@ -10,3 +10,6 @@
  
 [jar link]
 https://drive.google.com/file/d/1vrnYAslzYca7w3u4dJwQ1l-kWlBxgFBw/view?usp=sharing
+
+[API 명세서]
+https://docs.google.com/spreadsheets/d/1zqpigtZ4fQuLIYppJh0J7H6Prm2fSeOp/edit?usp=share_link&ouid=101428799496226634642&rtpof=true&sd=true
