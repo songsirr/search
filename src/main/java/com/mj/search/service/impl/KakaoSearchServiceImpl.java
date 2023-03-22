@@ -1,6 +1,6 @@
 package com.mj.search.service.impl;
 
-import com.mj.search.common.exception.KakaoServiceException;
+import com.mj.search.external.exception.KakaoExternalSearchServiceException;
 import com.mj.search.dto.SearchRequestDto;
 import com.mj.search.external.kakao.KakaoApi;
 import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
@@ -26,7 +26,7 @@ public class KakaoSearchServiceImpl implements KakaoSearchService {
 
     @Override
     public KakaoBlogSearchResult search(SearchRequestDto dto)
-            throws KakaoServiceException, IOException, ParseException {
+            throws KakaoExternalSearchServiceException, IOException, ParseException {
 
         KakaoBlogSearchRequest kakaoBlogSearchRequest = kakaoApi.blogSearch(dto.getQuery())
                 .size(dto.getSize())

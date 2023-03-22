@@ -1,7 +1,7 @@
 package com.mj.search.service.impl;
 
 import com.mj.search.common.enums.NaverSearchOption;
-import com.mj.search.common.exception.NaverServiceException;
+import com.mj.search.external.exception.NaverExternalSearchServiceException;
 import com.mj.search.dto.SearchRequestDto;
 import com.mj.search.external.naver.NaverApi;
 import com.mj.search.external.naver.model.NaverBlogSearchResult;
@@ -33,7 +33,7 @@ public class NaverBlogSearchServiceImpl implements NaverSearchService {
 
     @Override
     public NaverBlogSearchResult search(SearchRequestDto dto)
-            throws NaverServiceException, IOException, ParseException {
+            throws NaverExternalSearchServiceException, IOException, ParseException {
         NaverBlogSearchRequest naverBlogSearchRequest = naverApi.blogSearch(dto.getQuery())
                     .display(dto.getSize())
                     .start(dto.getPage())

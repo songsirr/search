@@ -1,9 +1,9 @@
 package com.mj.search.external.kakao;
 
 import com.google.gson.*;
-import com.mj.search.common.exception.KakaoServiceException;
+import com.mj.search.external.exception.KakaoExternalSearchServiceException;
 import com.mj.search.external.error.KakaoErrorCode;
-import com.mj.search.common.exception.ServiceException;
+import com.mj.search.external.exception.ExternalSearchServiceException;
 import com.mj.search.external.IHttpManager;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.config.RequestConfig;
@@ -56,7 +56,7 @@ public class KakaoHttpManager implements IHttpManager {
     }
 
     @Override
-    public String get(URI uri, Header[] headers) throws IOException, ParseException, ServiceException {
+    public String get(URI uri, Header[] headers) throws IOException, ParseException, ExternalSearchServiceException {
         assert (uri != null);
         assert (!uri.toString().equals(""));
 
@@ -72,7 +72,7 @@ public class KakaoHttpManager implements IHttpManager {
     }
 
     @Override
-    public String getResponseBody(CloseableHttpResponse httpResponse) throws IOException, ParseException, ServiceException {
+    public String getResponseBody(CloseableHttpResponse httpResponse) throws IOException, ParseException, ExternalSearchServiceException {
         final String responseBody = httpResponse.getEntity() != null
                 ? EntityUtils.toString(httpResponse.getEntity(), "UTF-8")
                 : null;
@@ -98,19 +98,19 @@ public class KakaoHttpManager implements IHttpManager {
 
         switch (httpResponse.getCode()) {
             case HttpStatus.SC_BAD_REQUEST:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_BAD_REQUEST, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_BAD_REQUEST, errorMessage);
             case HttpStatus.SC_UNAUTHORIZED:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_UNAUTHORIZED, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_UNAUTHORIZED, errorMessage);
             case HttpStatus.SC_FORBIDDEN:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_FORBIDDEN, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_FORBIDDEN, errorMessage);
             case HttpStatus.SC_TOO_MANY_REQUESTS:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_TOO_MANY_REQUEST, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_TOO_MANY_REQUEST, errorMessage);
             case HttpStatus.SC_INTERNAL_SERVER_ERROR:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_INTERNAL_SERVER_ERROR, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_INTERNAL_SERVER_ERROR, errorMessage);
             case HttpStatus.SC_BAD_GATEWAY:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_BAD_GATEWAY, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_BAD_GATEWAY, errorMessage);
             case HttpStatus.SC_SERVICE_UNAVAILABLE:
-                throw new KakaoServiceException(KakaoErrorCode.KAKAO_SERVICE_UNAVAILABLE, errorMessage);
+                throw new KakaoExternalSearchServiceException(KakaoErrorCode.KAKAO_SERVICE_UNAVAILABLE, errorMessage);
             default:
                 return responseBody;
         }

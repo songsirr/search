@@ -1,6 +1,6 @@
 package com.mj.search.external;
 
-import com.mj.search.common.exception.ServiceException;
+import com.mj.search.external.exception.ExternalSearchServiceException;
 import com.mj.search.external.kakao.KakaoApi;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.NameValuePair;
@@ -52,7 +52,7 @@ public abstract class AbstractRequest<T> implements IRequest<T>{
     public String getJson() throws
             IOException,
             ParseException,
-            ServiceException {
+            ExternalSearchServiceException {
 
         String json = httpManager.get(uri, headers.toArray(new Header[0]));
 

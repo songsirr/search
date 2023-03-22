@@ -1,6 +1,6 @@
 package com.mj.search.external.kakao.request;
 
-import com.mj.search.common.exception.ServiceException;
+import com.mj.search.external.exception.ExternalSearchServiceException;
 import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 import org.apache.hc.core5.http.ParseException;
 
@@ -15,7 +15,7 @@ public class KakaoBlogSearchRequest extends AbstractKaKaoRequest<KakaoBlogSearch
     public KakaoBlogSearchResult execute() throws
             IOException,
             ParseException,
-            ServiceException {
+            ExternalSearchServiceException {
         return new KakaoBlogSearchResult.JsonUtil().createModelObject(getJson());
     }
 

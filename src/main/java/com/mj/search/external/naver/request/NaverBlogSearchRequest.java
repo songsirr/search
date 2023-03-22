@@ -1,6 +1,6 @@
 package com.mj.search.external.naver.request;
 
-import com.mj.search.common.exception.ServiceException;
+import com.mj.search.external.exception.ExternalSearchServiceException;
 import com.mj.search.external.naver.model.NaverBlogSearchResult;
 import org.apache.hc.core5.http.ParseException;
 
@@ -15,7 +15,7 @@ public class NaverBlogSearchRequest extends AbstractNaverRequest<NaverBlogSearch
     public NaverBlogSearchResult execute() throws
             IOException,
             ParseException,
-            ServiceException {
+            ExternalSearchServiceException {
         return new NaverBlogSearchResult.JsonUtil().createModelObject(getJson());
     }
 

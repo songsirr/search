@@ -1,7 +1,7 @@
 package com.mj.search.external;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.mj.search.common.exception.ServiceException;
+import com.mj.search.external.exception.ExternalSearchServiceException;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.ParseException;
 
@@ -20,12 +20,12 @@ public interface IRequest<T> {
     T execute() throws
             IOException,
             ParseException,
-            ServiceException;
+            ExternalSearchServiceException;
 
     String getJson() throws
             IOException,
             ParseException,
-            ServiceException;
+            ExternalSearchServiceException;
 
     @JsonPOJOBuilder(withPrefix = "set")
     interface Builder<T, BT extends Builder<T, ?>> {

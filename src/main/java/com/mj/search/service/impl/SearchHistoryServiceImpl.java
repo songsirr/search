@@ -6,6 +6,7 @@ import com.mj.search.repository.SearchHistoryRepository;
 import com.mj.search.service.SearchHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     }
 
     @Override
+    @Transactional
     public void updateHotKeyword(String keyword) {
         SearchHistory s = searchHistoryRepository.findByKeyword(keyword);
 

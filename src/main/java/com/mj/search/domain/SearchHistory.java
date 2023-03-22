@@ -20,7 +20,6 @@ import java.util.Date;
 @Slf4j
 @DynamicInsert
 @DynamicUpdate
-@Builder
 public class SearchHistory implements Serializable {
 
     @Id
@@ -34,7 +33,17 @@ public class SearchHistory implements Serializable {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public void updateHit(){this.hit = this.hit++;}
+    public void updateHit(){
+        this.hit = this.hit + 1;
+    }
+
+    @Builder
+    public SearchHistory(Long id, String keyword, Integer hit, Date updatedAt) {
+        this.id = id;
+        this.keyword = keyword;
+        this.hit = hit;
+        this.updatedAt = updatedAt;
+    }
 
     public HotKeywordDto toDto(){
 

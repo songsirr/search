@@ -16,7 +16,7 @@ import java.util.List;
 @JsonIgnoreProperties({"code", "message", "httpStatus", "objectMapper", "errorList"})
 public class ResponseWrapperDto<T> {
 
-//    private Result result;
+    private Result result;
 
     private T data;
 
@@ -32,28 +32,28 @@ public class ResponseWrapperDto<T> {
         this.data = data;
         this.errorList = errorList ;
 
-//        this.result = Result.builder()
-//                .code(code)
-//                .message(message)
-//                .errorList(errorList)
-//                .build();
+        this.result = Result.builder()
+                .code(code)
+                .message(message)
+                .errorList(errorList)
+                .build();
     }
 
-//    @Getter
-//    @Setter
-//    @AllArgsConstructor
-//    @Builder
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    public static class Result {
-//
-//        private String code;
-//
-//        private String message;
-//
-//        private List<ErrorResponse.FieldError> errorList;
-//    }
-//
-//    public String toJson() throws IOException {
-//     return objectMapper.writeValueAsString(this);
-//    }
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @Builder
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class Result {
+
+        private String code;
+
+        private String message;
+
+        private List<ErrorResponse.FieldError> errorList;
+    }
+
+    public String toJson() throws IOException {
+     return objectMapper.writeValueAsString(this);
+    }
 }

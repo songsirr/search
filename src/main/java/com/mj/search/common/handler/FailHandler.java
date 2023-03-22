@@ -3,7 +3,7 @@ package com.mj.search.common.handler;
 import com.mj.search.common.dto.ResponseWrapperDto;
 import com.mj.search.common.error.OrmError;
 import com.mj.search.common.error.ErrorResponse;
-import com.mj.search.common.exception.ServiceException;
+import com.mj.search.external.exception.ExternalSearchServiceException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -20,10 +20,10 @@ public class FailHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<ResponseWrapperDto> handleException(ServiceException e) {
+    @ExceptionHandler(ExternalSearchServiceException.class)
+    public ResponseEntity<ResponseWrapperDto> handleException(ExternalSearchServiceException e) {
 
-        final ErrorResponse response = ErrorResponse.of(e.getErrorCode(), e.getErrorCode().getMessage());
+        final ErrorResponse response = ErrorResponse.of(e.getErrorCode(), e.getMessage());
 
         return ResponseEntity.status(response.getStatus()).body(
                 ResponseWrapperDto.builder()
