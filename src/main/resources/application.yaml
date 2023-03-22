@@ -20,7 +20,11 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: create
-
+logging:
+  level:
+    org:
+      springframework:
+        cache: TRACE
 
 kakao:
   api:

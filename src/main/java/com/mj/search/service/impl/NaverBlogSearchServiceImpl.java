@@ -9,6 +9,7 @@ import com.mj.search.external.naver.request.NaverBlogSearchRequest;
 import com.mj.search.service.NaverSearchService;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class NaverBlogSearchServiceImpl implements NaverSearchService {
 
 
     @Override
+    @Cacheable(cacheNames = "searchResult", key = "'naver'+#dto?.getQuery()+#dto?.getPage()+#dto?.getSize()+#dto?.getSort()", condition = "#dto.getSort().equals('accuracy') && #dto.getPage() == 1")
     public NaverBlogSearchResult search(SearchRequestDto dto)
             throws NaverExternalSearchServiceException, IOException, ParseException {
         NaverBlogSearchRequest naverBlogSearchRequest = naverApi.blogSearch(dto.getQuery())
