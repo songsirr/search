@@ -33,7 +33,7 @@ public class NaverBlogSearchServiceImpl implements NaverSearchService {
 
 
     @Override
-    @Cacheable(cacheNames = "searchResult", key = "'naver'+#dto?.getQuery()+#dto?.getPage()+#dto?.getSize()+#dto?.getSort()", condition = "#dto.getSort().equals('accuracy') && #dto.getPage() == 1")
+    @Cacheable(cacheNames = "searchResult", key = "'naver'+#dto?.getQuery()+#dto?.getPage()+#dto?.getSize()+#dto?.getSort()", condition = "#dto?.getSort().equals('accuracy') && #dto?.getPage() == 1")
     public NaverBlogSearchResult search(SearchRequestDto dto)
             throws NaverExternalSearchServiceException, IOException, ParseException {
         NaverBlogSearchRequest naverBlogSearchRequest = naverApi.blogSearch(dto.getQuery())

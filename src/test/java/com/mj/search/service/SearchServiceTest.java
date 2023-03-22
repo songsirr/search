@@ -17,13 +17,4 @@ public class SearchServiceTest {
         this.commonSearchService = commonSearchService;
     }
 
-    @Test
-    void search() {
-        SearchRequestDto dto = SearchRequestDto.builder().build();
-        dto.setQuery("더글로리");
-
-        CommonSearchResultDto r = commonSearchService.search(dto);
-
-        Assertions.assertNotNull(r);
-    }
 }

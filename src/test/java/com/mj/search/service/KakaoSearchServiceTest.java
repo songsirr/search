@@ -1,5 +1,6 @@
 package com.mj.search.service;
 
+import com.mj.search.dto.SearchRequestDto;
 import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,13 +17,20 @@ public class KakaoSearchServiceTest {
         this.kakaoSearchService = kakaoSearchService;
     }
 
-//    @Test
-//    void searchTest(){
-//        try {
-//            KakaoBlogSearchResult b = kakaoSearchService.search("안녕");
-//            Assertions.assertNotNull(b);
-//        } catch (Exception e){
-//            e.getMessage();
-//        }
-//    }
+    @Test
+    void searchTest() throws Exception {
+        // given
+        SearchRequestDto dto = SearchRequestDto.builder()
+                .query("asd")
+                .page(1)
+                .size(10)
+                .sort("accuracy")
+                .build();
+
+        // when
+        KakaoBlogSearchResult b = kakaoSearchService.search(dto);
+
+        // then
+        Assertions.assertEquals(b.getBlogs().length, 10);
+    }
 }
