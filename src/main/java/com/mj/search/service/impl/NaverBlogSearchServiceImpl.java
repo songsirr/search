@@ -31,7 +31,14 @@ public class NaverBlogSearchServiceImpl implements NaverSearchService {
         this.naverApi = new NaverApi.Builder().setClientId(clientId).setClientSecret(clientSecret).build();
     }
 
-
+    /**
+     * 네이버 블로그 검색
+     * @param dto
+     * @return
+     * @throws NaverExternalSearchServiceException // 네이버 자체 에러
+     * @throws IOException
+     * @throws ParseException
+     */
     @Override
     @Cacheable(cacheNames = "searchResult", key = "'naver'+#dto?.getQuery()+#dto?.getPage()+#dto?.getSize()+#dto?.getSort()", condition = "#dto?.getSort().equals('accuracy') && #dto?.getPage() == 1")
     public NaverBlogSearchResult search(SearchRequestDto dto)

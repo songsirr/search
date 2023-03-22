@@ -26,6 +26,14 @@ public class KakaoSearchServiceImpl implements KakaoSearchService {
         this.kakaoApi = new KakaoApi.Builder().setApiToken(secretKey).build();
     }
 
+    /**
+     * 카카오 블로그 검색
+     * @param dto
+     * @return
+     * @throws KakaoExternalSearchServiceException // 카카오 자체 에러
+     * @throws IOException
+     * @throws ParseException
+     */
     @Override
     @Cacheable(cacheNames = "searchResult", key = "'kakao'+#dto?.getQuery()+#dto?.getPage()+#dto?.getSize()+#dto?.getSort()", condition = "#dto.getSort().equals('accuracy') && #dto.getPage() == 1")
     public KakaoBlogSearchResult search(SearchRequestDto dto)

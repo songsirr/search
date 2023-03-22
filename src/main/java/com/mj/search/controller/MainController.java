@@ -6,6 +6,7 @@ import com.mj.search.dto.HotKeywordDto;
 import com.mj.search.dto.SearchRequestDto;
 import com.mj.search.service.SearchHistoryService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class MainController {
 
     private final SearchHistoryService searchHistoryService;
 
+    @ApiOperation(value = "인기검색어", notes = "메인 화면 진입시 호출하여 인기검색어 10개 호출")
     @GetMapping
     public ResponseEntity<ResponseWrapperDto> findHotKeyword() throws Exception {
         List<HotKeywordDto> r = searchHistoryService.findHotKeyword();

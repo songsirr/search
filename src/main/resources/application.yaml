@@ -28,9 +28,9 @@ logging:
 
 kakao:
   api:
-    key: 8637f135593c71343ec84139e3dcac88
+    key: your_key
 
 naver:
   client:
-    id: ZvpDU3Q6qGPZjyDCt8L_
-    secret: nPgkYkRW6B
+    id: your_id
+    secret: your_secret

@@ -15,7 +15,6 @@ import com.mj.search.external.naver.model.NaverBlogSearchResult;
 import com.mj.search.service.CommonSearchService;
 import com.mj.search.service.KakaoSearchService;
 import com.mj.search.service.NaverSearchService;
-import com.mj.search.service.SearchHistoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -32,10 +31,14 @@ public class CommonSearchServiceImpl implements CommonSearchService {
 
     private final NaverSearchService naverSearchService;
 
-    private final SearchHistoryService searchHistoryService;
-
     private final ApplicationEventPublisher applicationEventPublisher;
 
+    /**
+     * 통합검색 (카카오 우선으로 검색 -> 카카오 에러 사용불가(5xx) 시 네이버 검색)
+     * @param dto
+     * @return
+     * @throws Exception
+     */
     @Override
     public CommonSearchResultDto search(SearchRequestDto dto) throws Exception {
         CommonSearchResultDto result = CommonSearchResultDto.builder().build();
@@ -70,10 +73,22 @@ public class CommonSearchServiceImpl implements CommonSearchService {
         return result;
     }
 
+    /**
+     * 페이징을 위한 변수를 셋팅하는 메서드
+     * @param pagination
+     * @param total
+     * @param size
+     * @param page
+     * @param sort
+     * @return
+     */
     private Pagination createPagination(Pagination pagination, Integer total, Integer size, Integer page, String sort){
         int sizeValue = NumberUtil.defaultIfNull(CommonConstant.DEFAULT_SEARCH_SIZE, size);
         int pageValue = NumberUtil.defaultIfNull(CommonConstant.DEFAULT_SEARCH_PAGE, page);
         int totalPage = total/sizeValue;
+        if (total%sizeValue != 0){
+            totalPage++;
+        }
         if (totalPage > 50){
             totalPage = 50;
         }

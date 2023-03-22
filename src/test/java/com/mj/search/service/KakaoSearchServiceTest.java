@@ -1,6 +1,7 @@
 package com.mj.search.service;
 
 import com.mj.search.dto.SearchRequestDto;
+import com.mj.search.external.exception.KakaoExternalSearchServiceException;
 import com.mj.search.external.kakao.model.KakaoBlogSearchResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,5 +33,21 @@ public class KakaoSearchServiceTest {
 
         // then
         Assertions.assertEquals(b.getBlogs().length, 10);
+    }
+
+    @Test
+    void searchFailTest(){
+        // given
+        SearchRequestDto dto = SearchRequestDto.builder()
+                .query("asd")
+                .page(-1)
+                .size(10)
+                .sort("accuracy")
+                .build();
+
+        // when & then
+        Assertions.assertThrows(KakaoExternalSearchServiceException.class, () -> {
+            KakaoBlogSearchResult b = kakaoSearchService.search(dto);
+        });
     }
 }

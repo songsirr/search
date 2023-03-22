@@ -1,6 +1,7 @@
 package com.mj.search.service;
 
 import com.mj.search.dto.SearchRequestDto;
+import com.mj.search.external.exception.NaverExternalSearchServiceException;
 import com.mj.search.external.naver.model.NaverBlogSearchResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,5 +33,21 @@ public class NaverSearchServiceTest {
 
         // then
         Assertions.assertEquals(b.getItems().length, 10);
+    }
+
+    @Test
+    void searchFailTest(){
+        // given
+        SearchRequestDto dto = SearchRequestDto.builder()
+                .query("asd")
+                .page(-1)
+                .size(10)
+                .sort("accuracy")
+                .build();
+
+        // when & then
+        Assertions.assertThrows(NaverExternalSearchServiceException.class, () -> {
+            NaverBlogSearchResult b = naverSearchService.search(dto);
+        });
     }
 }

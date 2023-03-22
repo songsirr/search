@@ -17,6 +17,10 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
 
     private final SearchHistoryRepository searchHistoryRepository;
 
+    /**
+     * 인기검색어 상위 10개 반환
+     * @return
+     */
     @Override
     public List<HotKeywordDto> findHotKeyword() {
         List<SearchHistory> s = searchHistoryRepository.findTop10ByOrderByHitDesc();
@@ -24,6 +28,10 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
         return s.stream().map(SearchHistory::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * 검색어 저장 or 검색횟수 업데이트
+     * @param keyword
+     */
     @Override
     @Transactional
     public void updateHotKeyword(String keyword) {
